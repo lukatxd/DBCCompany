@@ -36,7 +36,7 @@ public class PollController {
 		try {
 			poll = pollService.save(pollDto);
 		}catch(Exception e) {
-			resp.addErrors(messages.getBadRequestCreatePollMesage());
+			resp.addErrors(messages.getMessage("badRequest.createPoll.message"));
 			return ResponseEntity.badRequest().body(resp);
 		}
 		

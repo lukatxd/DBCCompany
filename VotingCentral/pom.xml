@@ -57,7 +57,7 @@
 			<artifactId>h2</artifactId>
 		</dependency>
 
-		<!--  call external api -->
+		<!-- call external api -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
@@ -66,6 +66,13 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<version>2.5.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

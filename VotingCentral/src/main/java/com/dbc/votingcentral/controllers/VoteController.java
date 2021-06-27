@@ -2,6 +2,7 @@ package com.dbc.votingcentral.controllers;
 
 import java.util.NoSuchElementException;
 
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -15,34 +16,32 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dbc.votingcentral.dto.Response;
 import com.dbc.votingcentral.dto.VoteDTO;
 import com.dbc.votingcentral.entities.Vote;
-import com.dbc.votingcentral.services.Messages;
 import com.dbc.votingcentral.services.VoteService;
+import com.dbc.votingcentral.services.documentValidator.DocumentValidator;
+import com.dbc.votingcentral.services.documentValidator.VoterDocumentStatus;
 
 @RestController
 @RequestMapping("/vote")
 public class VoteController {
 	
-//	@Autowired
-//	private DocumentValidator documentValidator;
 	@Autowired
-	private Messages messages;
+	private DocumentValidator documentValidator;
 	@Autowired
 	private VoteService voteService;
 	
 	@PostMapping("/castVote/{pollId}")
-	public ResponseEntity<Response<Vote>> castVote(@PathVariable String pollId, @RequestBody VoteDTO voteDto, BindingResult result) {
+	public ResponseEntity<JSONObject> castVote(@RequestBody VoteDTO voteDto, BindingResult result) {
 		
-		Response<Vote> resp = new Response<Vote>();
-		Vote vote;
+		ResponseEntity<JSONObject> response;
 		try {
-			vote = voteService.save(voteDto, pollId);
+			VoterDocumentStatus voterStatus = documentValidator.validateDocument(voteDto.getDocument());
+			voteService.save(voteDto, voterStatus);
+			response = voterStatus.getResponse();
+			
 		}catch(Exception e) {
-			resp.addErrors(messages.getBadRequestCreatePollMesage());
-			return ResponseEntity.badRequest().body(resp);
-		}
-		
-		resp.setData(vote);
-		return ResponseEntity.ok(resp);
+			return ResponseEntity.badRequest().build();
+		}		
+		return response;
 	}
 	
 	@GetMapping("/{voteId}")
