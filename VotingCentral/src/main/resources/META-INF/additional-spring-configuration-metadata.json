@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "documentValidator.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'documentValidator.uri'"
+  },
+  {
+    "name": "badRequest.createPoll.message",
+    "type": "java.lang.String",
+    "description": "A description for 'badRequest.createPoll.message'"
+  }
+]}
