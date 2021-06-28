@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "163a26dc-8094-4deb-a78b-1a0e6158f8f9",
+		"name": "DBCCompanyVotingCentral",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createPoll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"insert_a_title\",\n    \"description\": \"insert_a_description\",\n    \"startDate\": \"dd/mm/aaaa\",\n    \"duration\": \"Mandatory field. Send numbers, i.e.: 1\",\n    \"timeUnit\": \"Mandatory field. Possible values are \\\"minutes\\\",\\\"hours\\\",\\\"days\\\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/poll/createPoll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"poll",
+						"createPoll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "castVote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pollId\" : \"Mandatory field. insert_the_id_from_the_poll_created\",\r\n    \"document\": \"Mandatory field. insert_a_cpf_document_here\",\r\n    \"choice\": \"Mandatory field. Send a true or false here. True='Sim', False='Não'\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/vote/castVote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"vote",
+						"castVote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPoll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
