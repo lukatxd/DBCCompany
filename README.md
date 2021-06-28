@@ -26,3 +26,7 @@ Clone o repositório para um diretório de sua escolha. Navegue até o diretóri
 Execute o comando:
 mvn org.springframework.boot:spring-boot-maven-plugin:run
 Isso irá baixar todas as dependências necessárias e o servidor Tomcat, e também irá subir a aplicação na porta padrão 8080.
+
+
+<h1>Documentação dos endpoints</h1>
+Importe o arquivo de collections no Postman "DBCCompanyVotingCentral.postman_collection.json" que está na raiz do repositório.
