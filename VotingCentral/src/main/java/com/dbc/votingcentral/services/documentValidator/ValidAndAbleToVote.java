@@ -16,7 +16,7 @@ public class ValidAndAbleToVote extends VoterDocumentStatus{
 	public ResponseEntity<JSONObject> getResponse(){
 		Map<String, String> abilityToVoteMap = new HashMap<>();
 		abilityToVoteMap.put("status", abilityToVote.name());
-		JSONObject j = new JSONObject();
+		JSONObject j = new JSONObject(abilityToVoteMap);
 		return ResponseEntity.ok().body(j);
 	}
 

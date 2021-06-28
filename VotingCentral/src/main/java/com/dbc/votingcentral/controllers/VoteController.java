@@ -18,6 +18,7 @@ import com.dbc.votingcentral.dto.VoteDTO;
 import com.dbc.votingcentral.entities.Vote;
 import com.dbc.votingcentral.services.VoteService;
 import com.dbc.votingcentral.services.documentValidator.DocumentValidator;
+import com.dbc.votingcentral.services.documentValidator.ValidAndAbleToVote;
 import com.dbc.votingcentral.services.documentValidator.VoterDocumentStatus;
 
 @RestController
@@ -29,12 +30,13 @@ public class VoteController {
 	@Autowired
 	private VoteService voteService;
 	
-	@PostMapping("/castVote/{pollId}")
+	@PostMapping(produces = "application/json", path="/castVote")
 	public ResponseEntity<JSONObject> castVote(@RequestBody VoteDTO voteDto, BindingResult result) {
 		
 		ResponseEntity<JSONObject> response;
 		try {
-			VoterDocumentStatus voterStatus = documentValidator.validateDocument(voteDto.getDocument());
+			//VoterDocumentStatus voterStatus = documentValidator.validateDocument(voteDto.getDocument());
+			VoterDocumentStatus voterStatus = new ValidAndAbleToVote();
 			voteService.save(voteDto, voterStatus);
 			response = voterStatus.getResponse();
 			
