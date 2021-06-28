@@ -35,8 +35,7 @@ public class VoteController {
 		
 		ResponseEntity<JSONObject> response;
 		try {
-			//VoterDocumentStatus voterStatus = documentValidator.validateDocument(voteDto.getDocument());
-			VoterDocumentStatus voterStatus = new ValidAndAbleToVote();
+			VoterDocumentStatus voterStatus = documentValidator.validateDocument(voteDto.getDocument());
 			voteService.save(voteDto, voterStatus);
 			response = voterStatus.getResponse();
 			
