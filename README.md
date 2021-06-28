@@ -15,6 +15,7 @@ Feito isso, o servidor já está executando na porta padrão 8082.
 O app VotingCentral criará a tabela quando estiver subindo, e a criação de tabelas fica a cargo do Flyway, que também criará quando a aplicação estiver subindo.
 
 <b>Maven</b>
+
 Para fazer o download das dependencias do projeto, é necessário ter o Maven instalado.
 https://maven.apache.org/download.cgi
 É necessário também definir a variável de ambiente M2_HOME e adicionar ao Path.
