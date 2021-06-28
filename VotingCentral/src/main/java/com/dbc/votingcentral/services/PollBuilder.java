@@ -53,8 +53,9 @@ public class PollBuilder {
 	private void resolveDuration(String duration) {
 		if (null == duration) {
 			this.duration = 1;
+		}else {
+			this.duration = Integer.parseInt(duration);
 		}
-		this.duration = Integer.parseInt(duration);
 	}
 
 	private void resolveTimeUnit(String timeUnit) throws ParseException {

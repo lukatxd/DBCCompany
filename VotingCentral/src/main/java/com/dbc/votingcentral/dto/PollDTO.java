@@ -1,15 +1,11 @@
 package com.dbc.votingcentral.dto;
 
-import org.springframework.lang.NonNull;
-
 public class PollDTO {
 	
 	String title;
 	String description;
 	String startDate;
-	@NonNull
 	String duration;
-	@NonNull
 	String timeUnit;
 	
 	public String getTitle() {

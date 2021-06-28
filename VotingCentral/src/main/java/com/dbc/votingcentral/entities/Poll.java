@@ -3,6 +3,7 @@ package com.dbc.votingcentral.entities;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "poll")
@@ -35,6 +37,11 @@ public class Poll implements Serializable {
 	
 	@Column(name="endDate", nullable = false)
 	private Timestamp endDate;
+	
+	@Transient
+	private int yesCount;
+	@Transient
+	private int noCount;
 
 	@PrePersist
 	private void generateId() {
@@ -89,6 +96,49 @@ public class Poll implements Serializable {
 
 	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
+	}
+
+	public int getYesCount() {
+		return yesCount;
+	}
+
+	public void setYesCount(int yesCount) {
+		this.yesCount = yesCount;
+	}
+
+	public int getNoCount() {
+		return noCount;
+	}
+
+	public void setNoCount(int noCount) {
+		this.noCount = noCount;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(creationDate, description, endDate, noCount, pollId, startDate, title, yesCount);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Poll other = (Poll) obj;
+		return Objects.equals(creationDate, other.creationDate) && Objects.equals(description, other.description)
+				&& Objects.equals(endDate, other.endDate) && noCount == other.noCount
+				&& Objects.equals(pollId, other.pollId) && Objects.equals(startDate, other.startDate)
+				&& Objects.equals(title, other.title) && yesCount == other.yesCount;
+	}
+
+	@Override
+	public String toString() {
+		return "Poll [pollId=" + pollId + ", title=" + title + ", description=" + description + ", creationDate="
+				+ creationDate + ", startDate=" + startDate + ", endDate=" + endDate + ", yesCount=" + yesCount
+				+ ", noCount=" + noCount + "]";
 	}
 
 }

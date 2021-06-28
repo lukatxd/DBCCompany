@@ -25,6 +25,12 @@ public class VoteService {
 		Vote vote = null;
 		if(AbilityToVote.ABLE_TO_VOTE.equals(voterStatus.getAbilityToVote())) {
 			Poll poll =pollService.getPoll(voteDto.getPollId());
+			
+			Vote existingVote = voteRepository.findByPollIdAndUserDocument(poll, voteDto.getDocument());
+			if(existingVote !=null) {
+				return vote;
+			}
+					
 			Timestamp now = new Timestamp(Calendar.getInstance().getTimeInMillis());
 			if(poll.getEndDate().after(now)) {
 				vote = new Vote(poll, voteDto.getDocument(), voteDto.getChoice());
